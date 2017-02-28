@@ -28,6 +28,7 @@ int get_max(std::list<int> list)
 
 int get_max_iter(std::list<int>::iterator begin, std::list<int>::iterator end)
 {
+	if (begin == end) throw "Empty list";
 
 	int max = *begin;
 	for (auto it = begin; it != end; it++)

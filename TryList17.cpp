@@ -21,7 +21,7 @@ void print_menu()
 	std::cout << "Enter the command: ";
 }
 
-std::string input_file_name()
+std::string input_file_name()  
 {
 	std::string name;
 	std::cout << "Enter file name: ";
@@ -113,17 +113,5 @@ int main()
 		}
 
 	}
-	setlocale(LC_ALL, "rus");
-	random_fill_file_cicle("Test1.txt", 10, 25);
-	random_fill_file_generate("Test2.txt", 10, 25);
-	std::list<int> List = get_list_from_file("Test1.txt");
-	output_list_console(List);
-	output_list_console(modify(List));
-	output_list_console(modify(List.begin(),List.end()));
-	output_list_console(modify_transform(List));
-	output_list_console(modify_foreach(List));
-
-	system("pause");
-	return 0;
 }
 
