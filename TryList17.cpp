@@ -24,7 +24,7 @@ void print_menu()
 	std::cout << " 9)Output console" << std::endl;
 	std::cout << "10)Output file" << std::endl;
 	std::cout << "11)Exit" << std::endl;
-	std::cout << "Enter the command: "<<std::endl;
+	std::cout << "Enter the command: " << std::endl;
 }
 
 std::string output_file_name()
@@ -50,7 +50,7 @@ std::string input_file_name()
 		f.open(res + ".txt");
 	};
 	f.close();
-	return (res == "") ? "defaultname.txt" : res+".txt";
+	return (res == "") ? "defaultname.txt" : res + ".txt";
 }
 
 
@@ -60,6 +60,9 @@ int main()
 	std::string file_name;
 	std::string str;
 	menu_item mi;
+
+	auto begin = list.begin();
+	auto end = list.begin();
 
 	while (true)
 	{
@@ -87,7 +90,7 @@ int main()
 			std::cout << "Enter range: ";
 			std::cin >> M;
 			random_fill_file_cicle(file_name, N, M);
-			random_fill_file_generate("generate_"+file_name, N, M);
+			random_fill_file_generate("generate_" + file_name, N, M);
 			std::getline(std::cin, str);
 			break;
 		case IN:
@@ -108,15 +111,68 @@ int main()
 			}
 			break;
 		case MOD_I:
-			if (!list.empty())
-			{
+			int a, b, o;
+			a = b = o = 0;
+			if (!list.empty()) {
 				output_list_console(list);
-				list = modify(list.begin(), list.end());
-				output_list_console(list);
-			}
-			else
-			{
-				std::cout << "List is empty(" << std::endl;
+				while ((o < 1) || (o > 3))
+				{
+					std::cout << " 1)[list.begin(), list.end())\n";
+					std::cout << " 2)[a, b)\n";
+					std::cout << " 3)Cancel\n";
+					std::cout << " >> ";
+					std::cin >> o;
+				}
+				switch (o)
+				{
+				case 1:
+					modify_range(list.begin(), list.end());
+					output_list_console(list);
+
+					std::getline(std::cin, str);
+					break;
+				case 2:
+					std::cout << "a: ";
+					std::cin >> a;
+					std::cout << "b: ";
+					std::cin >> b;
+
+					while (a < 0 || a > list.size() )
+					{
+						std::cout << "repeat input a: ";
+						std::cin >> a;
+					}
+
+					while (b < 0 || b > list.size())
+					{
+						std::cout << "repeat input b: ";
+						std::cin >> b;
+					}
+
+					if (b < a)
+					{
+						int tmp = a;
+						a = b;
+						b = tmp;
+					}
+
+					begin = list.begin();
+					end = list.begin();
+
+					std::advance(begin, a);
+					std::advance(end, b);
+
+					modify_range(begin, end);
+
+					output_list_console(list);
+
+					std::getline(std::cin, str);
+					break;
+				case 3:
+
+					std::getline(std::cin, str);
+					break;
+				}
 			}
 			break;
 		case MOD_T:
@@ -132,7 +188,7 @@ int main()
 			}
 			break;
 		case MOD_F:
-			if (!list.empty()) 
+			if (!list.empty())
 			{
 				output_list_console(list);
 				list = modify_foreach(list);
@@ -191,7 +247,5 @@ int main()
 			std::cout << "!!!Wrong command!!!" << std::endl;
 			break;
 		}
-		//std::getline(std::cin, str);
 	}
 }
-

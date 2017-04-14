@@ -113,7 +113,7 @@ std::list<int> modify(std::list<int> list)
 
 //4
 
-std::list<int> modify(std::list<int>::iterator begin, std::list<int>::iterator end)
+void modify_range(std::list<int>::iterator begin, std::list<int>::iterator end)
 {
 	/*std::list<int> list;
 	for (auto it = begin; it != end; it++)
@@ -130,14 +130,12 @@ std::list<int> modify(std::list<int>::iterator begin, std::list<int>::iterator e
 		int max = get_max_iter(begin, end);
 		for (auto it = begin; it != end; it++)
 		{
-			list_out.push_back(*it > 0 ? max : *it);
+			*it = *it > 0 ? max : *it;
 		}
-		return list_out;
 	}
 	catch (std::string e)
 	{
 		std::cout << e << std::endl;
-		return list_out;
 	}
 }
 
@@ -181,7 +179,7 @@ std::list<int> modify_foreach(std::list<int> list_in)
 
 //7
 
-int list_sum(std::list<int> list)
+int list_sum(std::list<int> &list)
 {
 	int sum = 0;
 	for (int x: list)
@@ -191,7 +189,7 @@ int list_sum(std::list<int> list)
 	return sum;
 }
 
-double list_average(std::list<int> list)
+double list_average(std::list<int> &list)
 {
 	return (double)list_sum(list)/list.size();
 }
@@ -199,7 +197,7 @@ double list_average(std::list<int> list)
 
 //8
 
-void output_list_file(std::list<int> list, std::string file_name = "")
+void output_list_file(std::list<int> &list, std::string file_name = "")
 {	
 	std::fstream fout(file_name, std::ios::out);
 	for (int x : list)
@@ -209,7 +207,7 @@ void output_list_file(std::list<int> list, std::string file_name = "")
 	fout.close();
 }
 
-void output_list_console(std::list<int> list)
+void output_list_console(std::list<int> &list)
 {
 	for (int x : list)
 	{
